@@ -80,12 +80,16 @@ public class Prime {
 
     public static boolean prime(long n) {
         if (n == 1 || n == 2) return true; // optimize
-        boolean optimization = n % 2 != 0 && n % 3 != 0 && n % 5 != 0 && n % 7 != 0 && n % 11 != 0;
-        return optimization && isPrimeByMillerRabin(n, S);
+        if (n % 2 == 0) return false;
+        return isPrimeByMillerRabin(n, S);
     }
 
     public static long gcd(long a, long b) {
         return b == 0 ? a : gcd(b, a % b);
+    }
+
+    public static long lcm(long a, long b) {
+        return a / gcd(a, b) * b;
     }
 
     public static Stream<Long> factorize(long n) {
@@ -124,6 +128,6 @@ public class Prime {
 
 
     public static long randomLong(long lo, long hi) {
-        return (Math.round(RND.nextDouble() * (hi - lo))) + lo - 1;
+        return (Math.round(RND.nextDouble() * (hi - lo))) + lo;
     }
 }
